@@ -21,5 +21,4 @@ public class ContactRepository {
     public Map<Integer, Contact> getRepository(){
         return repository;
     }
-
 }
