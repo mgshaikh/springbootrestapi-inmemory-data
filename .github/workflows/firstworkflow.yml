@@ -1,0 +1,28 @@
+name: build-publish-workflow
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet
+        run: echo "welcome to Github action"
+      - name: print env variable
+        run: echo  ${{ toJson(github) }}
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: list directory
+        run: |
+          ls -l
+          echo "printing current dir"
+          pwd
+  publish-docker:
+    runs-on: ubuntu-latest
+    steps: 
+     - name: Bye
+       run: echo "Done"
+
+    
+    
