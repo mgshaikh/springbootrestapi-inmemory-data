@@ -1,15 +1,23 @@
 name: build-publish-workflow
 
-on: [workflow_dispatch]
-
+on: 
+  workflow_dispatch: 
+  push: 
+    branches: 
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Greet
-        run: echo "welcome to Github action"
-      - name: print env variable
-        run: echo  ${{ toJson(github) }}
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Run Tests
+        run: mvn -B clean test
   package:
     runs-on: ubuntu-latest
     steps:
