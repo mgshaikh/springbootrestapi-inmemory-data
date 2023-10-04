@@ -1,3 +1,4 @@
+
 name: Java CI with Maven
 on: [push, workflow_dispatch]
 
@@ -5,21 +6,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Greeting
-        run: echo "Welcome to Actions"
       - name: Clone the repository
         uses: actions/checkout@v4
-      - name: build
-        run: |
-          pwd
-          ls -l
-          echo "Done - Building"
+      - name: setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Run Tests
+        run: mvn -B clean test
   package:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - name: package
-        run: echo "Building Jar file"
+      - name: Clone the repository
+        uses: actions/checkout@v4
+      - name: setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: package the application
+        run: mvn -B clean package -DskipTests
+      - uses: actions/upload-artifact@v3
+        with:
+          name: api-jar
+          path: target/*.jar
     
   publish:
     needs: [package]
