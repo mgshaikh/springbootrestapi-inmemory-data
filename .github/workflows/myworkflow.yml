@@ -12,6 +12,7 @@ jobs:
       - name: build
         run: |
           pwd
+          ls -l
           echo "Done - Building"
   package:
     runs-on: ubuntu-latest
