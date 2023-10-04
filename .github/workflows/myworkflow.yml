@@ -15,12 +15,14 @@ jobs:
           ls -l
           echo "Done - Building"
   package:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: package
         run: echo "Building Jar file"
     
   publish:
+    needs: [package]
     runs-on: ubuntu-latest
     steps:
       - name: creating Docker image
