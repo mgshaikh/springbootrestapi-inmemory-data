@@ -1,0 +1,27 @@
+name: Java CI with Maven
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Greeting
+        run: echo "Welcome to Actions"
+      - name: Clone the repository
+        uses: actions/checkout@v4
+      - name: build
+        run: |
+          pwd
+          echo "Done - Building"
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: package
+        run: echo "Building Jar file"
+    
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: creating Docker image
+        run: echo "Creating image"
+
